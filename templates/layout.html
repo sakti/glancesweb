@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="static/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+</head>
+<body>
+	<div class="container">
+		{% block body %}{% endblock %}
+	</div>
+	<script src="static/jquery.js"></script>
+	<script src="static/d3.min.js"></script>
+	<script src="static/app.js"></script>
+</body>
+</html>

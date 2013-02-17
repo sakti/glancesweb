@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}Glances-web Setting{% endblock %}
+{% block body %}
+<div class="row">
+	<div class="span12">
+		<h1>Setting</h1>
+		<p>Setup glances server target. Glances use xmlrpc to share status data, by default glances open port <code>61209</code>. Make sure that port accessible from glances-web.<p>
+	</div>
+</div>
+<div class="row">
+	<div class="span12">
+		<hr/>
+		<form class="form-horizontal" action="" method="post">
+		  <div class="control-group">
+		    <label class="control-label" for="server">IP Address or Hostname</label>
+		    <div class="controls">
+		      <input type="text" id="server" name="server" placeholder="(e.g: 127.0.0.1, localhost)">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="port">Glances server port</label>
+		    <div class="controls">
+		      <input type="text" id="port" name="port" placeholder="61209">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="controls">
+		      <button type="submit" class="btn">Save</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+</div>
+{% endblock %}
