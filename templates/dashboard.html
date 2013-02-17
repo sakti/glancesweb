@@ -5,6 +5,29 @@
 <div class="row">
 	<div class="span12">
 		<h1>Monitoring Dashboard</h1>
+		<p>Glances server: <code>http://{{ session.get("glances_server") }}</code></p>
 	</div>
 </div>
+<div class="row">
+	<div class="span12">
+		<hr>
+		<h3>CPU</h3>
+		<pre>
+idle: <span id="cpu-idle"></span>
+iowait: <span id="cpu-iowait"></span>
+irq: <span id="cpu-irq"></span>
+nice: <span id="cpu-nice"></span>
+system: <span id="cpu-system"></span>
+user: <span id="cpu-user"></span></pre>
+		<hr>
+		<h3>Memory</h3>
+		<hr>
+		<h3>Disk</h3>
+		<hr>
+		<h3>IO</h3>
+	</div>
+</div>
+<script>
+window.glances_server = "{{ session.get('glances_server') }}";
+</script>
 {% endblock %}

@@ -12,7 +12,6 @@ import socket
 
 app = Flask(__name__)
 app.secret_key = "development key"
-GLANCES_SERVER = "localhost:61209"
 
 
 @app.route("/")
@@ -36,7 +35,7 @@ def setting():
 def get_status():
     if "glances_server" not in session:
         abort(401)
-    server = ServerProxy("http://%s" % GLANCES_SERVER)
+    server = ServerProxy("http://%s" % session.get("glances_server"))
     try:
         data = server.getAll()
     except socket.error:
