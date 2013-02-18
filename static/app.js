@@ -34,7 +34,7 @@ $(function(){
 	var graphLoagAvg = new Rickshaw.Graph( {
 		element: document.getElementById("cpu-load-avg"),
 		width: 900,
-		height: 200,
+		height: 100,
 		renderer: 'line',
 		series: new Rickshaw.Series.FixedDuration([{ name: 'min1' }, { name: 'min5' }, { name: 'min15' }], undefined, {
 			timeInterval: 3000,
@@ -53,10 +53,32 @@ $(function(){
 	} );
 	axesLoadAvg.render();
 
+	var graphPerCPU = new Rickshaw.Graph( {
+		element: document.getElementById("cpu-percpu"),
+		width: 900,
+		height: 100,
+		renderer: 'line',
+		series: new Rickshaw.Series.FixedDuration([{name:'cpu0'}], undefined, {
+			timeInterval: 3000,
+			maxDataPoints: 100,
+			timeBase: new Date().getTime() / 1000
+		}) 
+	} );
+	graphPerCPU.render();
+
+	var hoverDetailPerCPU = new Rickshaw.Graph.HoverDetail( {
+		graph: graphPerCPU
+	} );
+
+	var axesPerCPU = new Rickshaw.Graph.Axis.Time( {
+		graph: graphPerCPU
+	} );
+	axesPerCPU.render();
+
 
 	// rendering function, update data on all visual
 	render = function(data) {
-		console.log(data);
+		console.log(data.percpu);
 
 		// cpu
 		gauges['cpu-idle'].redraw(data.cpu.idle);
@@ -70,7 +92,14 @@ $(function(){
 		graphLoagAvg.series.addData(data.load);
 		graphLoagAvg.render();
 
-		
+		var perCPU = {}
+		for (item in data.percpu) {
+			perCPU['cpu' + item] = data.percpu[item].system + data.percpu[item].user;
+		}
+		graphPerCPU.series.addData(perCPU);
+		graphPerCPU.render();
+
+
 	}
 
 	// if glances_server defined, execute render function by interval
